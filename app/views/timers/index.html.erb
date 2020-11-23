@@ -1,0 +1,28 @@
+<h1>Attendance Records</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Employee</th>
+      <th scope="col">Time in</th>
+      <th scope="col">Time out</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @timers.each do |timer| %>
+      <tr>
+        <td><%= timer.employee_id %></td>
+        <td><%= timer.time_in %></td>
+        <td><%= timer.time_out %></td>
+        <td><%= link_to 'More', timer %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Timer', new_timer_path, class: "btn btn-primary" %>
+
+<br><br>

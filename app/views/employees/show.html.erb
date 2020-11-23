@@ -1,0 +1,62 @@
+<div class="container-fluid">    
+  <div class="row content">
+    <div class="col-md-3">
+      <div class="card" style="width; 18rem;">
+        <img src="<%= polymorphic_url(@employee.picture) %>" class="card-img-tope" style="width:100%" alt="Card image cap">
+      </div>
+      <div class="card-body">
+        <h2 class="card-title"> <%= @employee.first_name %>  <%= @employee.last_name %> </h2>
+        <p class="card-text">
+          <strong>SSN:</strong>
+          <%= @employee.ssn %>
+        </p>
+        <p class="card-text">
+          <strong>Address:</strong>
+          <%= @employee.address %>
+        </p>
+      </div>
+    </div>
+
+    <div class="col-md-9">
+      <div class="card text-white border-dark mb-3">
+        <div class="card-body">
+          <h1 class="card-title">
+              <% if current_user.employee.timers.blank? %>
+                <%= link_to 'Clock In', timers_clockin_path, class:'btn btn-info btn-lg' %>
+              <% elsif current_user.employee.timers.last.time_in.blank? or current_user.employee.timers.last.time_in.present?  and current_user.employee.timers.last.time_out.present? %>
+                <%= link_to 'Clock In', timers_clockin_path, class:'btn btn-lg btn-info' %>
+              <% else %>
+                <%= link_to 'Clock Out', timers_clockout_path, class:'btn btn-lg btn-danger' %>
+              <% end %>
+          </h1>
+          <br>
+          <div class="card-text">
+              <% if current_user.employee.timers.last.blank? %>
+              <p></p>
+              <% elsif current_user.employee.timers.last.time_in.blank? or current_user.employee.timers.last.time_in.present? and current_user.employee.timers.last.time_out.blank? %>
+              <p>
+              Last Clockin Time: <strong><%= current_user.employee.timers.last.time_in.strftime(" %A, %I:%M %p, %b %d, %Y") %> </strong>
+              </p>
+              <% else %>
+              <p>
+                Last clockout Time: <b><%= current_user.employee.timers.last.time_out.strftime(" %A, %I:%M %p, %b %d, %Y") if current_user.employee.timers.last.time_out %> </b>
+              </p>
+              <p>
+                Total Hours Worked: <b><%= ((current_user.employee.timers.last.time_out - current_user.employee.timers.last.time_in)/1.minute).round %> minutes </b>
+              </p>
+              <% end %>
+              <br>
+          
+              <%= link_to 'All Records', timers_path, class:"btn btn-link" %> </b>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+
+
+<%= link_to 'Edit', edit_employee_path(@employee) %> 
