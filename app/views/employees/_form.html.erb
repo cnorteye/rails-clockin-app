@@ -11,19 +11,19 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :first_name %>
-    <%= form.text_field :first_name %>
+    <%= form.text_field :first_name, class:"form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :last_name %>
-    <%= form.text_field :last_name %>
+    <%= form.text_field :last_name, class: "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :ssn %>
-    <%= form.text_field :ssn %>
+    <%= form.text_field :ssn, class: "form-control" %>
   </div>
 
   <div class="field">
@@ -31,9 +31,9 @@
     <%= form.file_field :picture %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :address %>
-    <%= form.text_area :address %>
+    <%= form.text_area :address, class: "form-control" %>
   </div>
 
   <div class="field">
